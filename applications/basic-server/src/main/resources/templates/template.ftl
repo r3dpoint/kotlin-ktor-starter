@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name=viewport content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ff835c">
+        <meta name="theme-color" content="#2B3137">
 
         <title>Colorado Collective</title>
         <link rel="stylesheet" href="/style/reset.css">

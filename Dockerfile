@@ -1,4 +1,4 @@
-FROM openjdk
+FROM openjdk:18-jdk-slim
 ENV PORT=8888
 ENV JAVA_OPTS=""
 ENV APP=""
