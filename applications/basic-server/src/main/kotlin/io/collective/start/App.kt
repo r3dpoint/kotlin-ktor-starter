@@ -9,7 +9,7 @@ import io.ktor.http.content.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
-import io.ktor.server.jetty.*
+import io.ktor.server.netty.*
 import io.ktor.util.pipeline.*
 import java.util.*
 
@@ -54,8 +54,8 @@ private fun PipelineContext<Unit, ApplicationCall>.headers(): MutableMap<String,
     return headers
 }
 
-fun main(args: Array<String>) {
+fun main() {
     TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
-    val port = System.getenv("PORT")?.toInt() ?: 8080
-    embeddedServer(Jetty, port, watchPaths = listOf("basic-server"), module = Application::module).start()
+    val port = System.getenv("PORT")?.toInt() ?: 8888
+    embeddedServer(Netty, port, watchPaths = listOf("basic-server"), module = { module() }).start()
 }

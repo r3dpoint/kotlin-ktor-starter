@@ -10,7 +10,7 @@ A continuum style example application using Kotlin and Ktor that includes a sing
 The example depends on the below technologies -
 
 * Language [Kotlin](https://kotlinlang.org)
-* Web Framework [Ktor](https://ktor.io) with [Jetty](https://www.eclipse.org/jetty/) and [Freemarker](https://freemarker.apache.org)
+* Web Framework [Ktor](https://ktor.io) with [Netty](https://netty.io/) and [Freemarker](https://freemarker.apache.org)
 * Build tool [Gradle](https://gradle.org)
 * Testing tools [JUnit](https://junit.org/)
 * Production [Heroku](https://www.heroku.com)
@@ -34,6 +34,20 @@ Run servers locally using the below example -
 
 ```bash
 java -jar applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar
+```
+
+## Docker
+
+Building with docker.
+
+```bash
+docker build -t kotlin-ktor-starter .
+```
+
+Running with docker.
+
+```bash
+docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
 ```
 
 ## Production

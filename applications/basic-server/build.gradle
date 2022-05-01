@@ -5,18 +5,25 @@ apply plugin: 'application'
 mainClassName = "io.collective.start.AppKt"
 
 dependencies {
-    compile "io.ktor:ktor-freemarker:$ktor_version"
+    implementation "io.ktor:ktor-freemarker:$ktor_version"
+    implementation "io.ktor:ktor-jackson:$ktor_version"
 
-    compile "com.google.auth:google-auth-library-oauth2-http:0.25.5"
-    compile "io.ktor:ktor-auth:$ktor_version"
-    compile "io.ktor:ktor-auth-jwt:$ktor_version"
+    implementation "com.google.auth:google-auth-library-oauth2-http:0.25.5"
+    implementation "io.ktor:ktor-auth:$ktor_version"
+    implementation "io.ktor:ktor-auth-jwt:$ktor_version"
+}
+
+tasks.withType(Copy).all {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes "Main-Class": "io.collective.start.AppKt"
     }
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
