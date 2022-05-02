@@ -2,23 +2,125 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ${APP_NAME}
+    app: data-collector
     source: freshcloud
-  name: ${APP_NAME}
-  namespace: ${APP_NAME}
+  name: data-collector
+  namespace: kotlin-ktor-starter
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${APP_NAME}
+      app: data-collector
   template:
     metadata:
       labels:
-        app: ${APP_NAME}
+        app: data-collector
     spec:
       containers:
         - image: ${IMAGE}
-          name: ${APP_NAME}
+          name: data-collector
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: PORT
+              value: '8886'
+            - name: APP
+              value: applications/data-collector-server/build/libs/data-collector-server-1.0-SNAPSHOT.jar
+          ports:
+            - containerPort: 8886
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: data-collector
+  name: data-collector
+  namespace: kotlin-ktor-starter
+spec:
+  ports:
+    - port: 8886
+      protocol: TCP
+      targetPort: 8886
+  selector:
+    app: data-collector
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: data-analyzer
+    source: freshcloud
+  name: data-analyzer
+  namespace: kotlin-ktor-starter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-analyzer
+  template:
+    metadata:
+      labels:
+        app: data-analyzer
+    spec:
+      containers:
+        - image: ${IMAGE}
+          name: data-analyzer
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: PORT
+              value: '8887'
+            - name: APP
+              value: applications/data-analyzer-server/build/libs/data-analyzer-server-1.0-SNAPSHOT.jar
+          ports:
+            - containerPort: 8887
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: data-analyzer
+  name: data-analyzer
+  namespace: kotlin-ktor-starter
+spec:
+  ports:
+    - port: 8887
+      protocol: TCP
+      targetPort: 8887
+  selector:
+    app: data-analyzer
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kotlin-ktor-starter
+    source: freshcloud
+  name: kotlin-ktor-starter
+  namespace: kotlin-ktor-starter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kotlin-ktor-starter
+  template:
+    metadata:
+      labels:
+        app: kotlin-ktor-starter
+    spec:
+      containers:
+        - image: ${IMAGE}
+          name: kotlin-ktor-starter
           imagePullPolicy: Always
           resources:
             requests:
@@ -36,26 +138,26 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: ${APP_NAME}
-  name: ${APP_NAME}
-  namespace: ${APP_NAME}
+    app: kotlin-ktor-starter
+  name: kotlin-ktor-starter
+  namespace: kotlin-ktor-starter
 spec:
   ports:
     - port: 8888
       protocol: TCP
       targetPort: 8888
   selector:
-    app: ${APP_NAME}
+    app: kotlin-ktor-starter
   sessionAffinity: None
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ${APP_NAME}
-  namespace: ${APP_NAME}
+  name: kotlin-ktor-starter
+  namespace: kotlin-ktor-starter
   labels:
-    app: ${APP_NAME}
+    app: kotlin-ktor-starter
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: contour
@@ -64,16 +166,16 @@ metadata:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-    - host: ${APP_NAME}.${DOMAIN}
+    - host: kotlin-ktor-starter.${DOMAIN}
       http:
         paths:
           - backend:
               service:
-                name: ${APP_NAME}
+                name: kotlin-ktor-starter
                 port:
                   number: 8888
             pathType: ImplementationSpecific
   tls:
     - hosts:
-        - ${APP_NAME}.${DOMAIN}
-      secretName: ${APP_NAME}-cert
+        - kotlin-ktor-starter.${DOMAIN}
+      secretName: kotlin-ktor-starter-cert
