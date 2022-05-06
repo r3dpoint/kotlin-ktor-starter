@@ -1,0 +1,71 @@
+resource_types:
+  - name: kpack-image
+    type: registry-image
+    source:
+      repository: gcr.io/cf-build-service-public/concourse-kpack-resource
+      tag: "1.0"
+
+resources:
+  - name: kotlin-ktor-starter-image
+    type: registry-image
+    source:
+      repository: registry.${REGISTRY_DOMAIN}/kotlin-ktor-starter/kotlin-ktor-starter
+
+  - name: kotlin-ktor-starter-source-code
+    type: git
+    source:
+      uri: https://github.com/initialcapacity/kotlin-ktor-starter
+      branch: main
+
+  - name: kotlin-ktor-starter-build-service
+    type: kpack-image
+    source:
+      image: kotlin-ktor-starter-image
+      namespace: kotlin-ktor-starter
+      gke:
+        json_key: ((service-account-key))
+        kubeconfig: ((kubeconfig))
+jobs:
+  - name: vulnerability-scan
+    plan:
+      - task: sleep
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: ubuntu
+              tag: bionic
+          run:
+            path: /bin/sleep
+            args: [ 5s ]
+      - in_parallel:
+          - get: kotlin-ktor-starter-source-code
+          - get: kotlin-ktor-starter-build-service
+            trigger: true
+            passed: [ build-kotlin-ktor-starter-image ]
+          - get: kotlin-ktor-starter-image
+      - task: trivy-fs
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: aquasec/trivy
+          inputs:
+            - name: kotlin-ktor-starter-image
+          caches:
+            - path: trivy-cache
+          run:
+            path: sh
+            args:
+              - -cex
+              - |
+                trivy --cache-dir trivy-cache fs --severity HIGH,CRITICAL --vuln-type library,os --ignore-unfixed --exit-code 0 kotlin-ktor-starter-image/rootfs
+  - name: build-kotlin-ktor-starter-image
+    plan:
+      - get: kotlin-ktor-starter-source-code
+        trigger: true
+      - put: kotlin-ktor-starter-build-service
+        params:
+          commitish: kotlin-ktor-starter-source-code/.git/ref
