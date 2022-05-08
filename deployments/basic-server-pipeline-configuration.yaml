@@ -32,7 +32,7 @@ metadata:
   name: kotlin-ktor-starter-image
   namespace: kotlin-ktor-starter
 spec:
-  tag: registry.$REGISTRY_DOMAIN/kotlin-ktor-starter/kotlin-ktor-starter
+  tag: registry.$REGISTRY_DOMAIN/kpack/kotlin-ktor-starter
   serviceAccount: kotlin-ktor-starter-service-account
   builder:
     name: kotlin-ktor-starter-builder
