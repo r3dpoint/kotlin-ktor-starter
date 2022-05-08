@@ -1,7 +1,7 @@
-# Kotlin Ktor example
+# Kotlin ktor example
 
-A continuum style example application using Kotlin and Ktor that includes a single
- web application with 2 background workers.
+A [application continuum](https://www.appcontinuum.io/) style example application using Kotlin and Ktor that includes a single
+ web application with 2 background workers. Deployed via [Fresh Cloud](https://www.freshcloud.com/).
 
 * Basic web application
 * Data analyzer
@@ -50,7 +50,7 @@ Running with docker.
 docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
 ```
 
-## Production
+## Buildpacks
 
 Installing the [pack](https://buildpacks.io/docs/tools/pack/) CLI
 
@@ -64,4 +64,5 @@ Build the application using pack.
 pack build kotlin-ktor-starter --builder heroku/buildpacks:20
 ```
 
-Example kubernetes deployment and service files located in `applications/basic-server`.
+Fresh cloud deployment and pipline files are located in `deployment`.
+Google cloud kubernetes deployment and service files located in `applications/basic-server`.
