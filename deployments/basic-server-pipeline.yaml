@@ -123,6 +123,7 @@ jobs:
               chmod 600 ${DOLLAR}{cred_file}
               gcloud auth login --cred-file "${DOLLAR}{cred_file}" --quiet
               gcloud container clusters get-credentials ${DOLLAR}{GCP_CLUSTER_NAME} --zone ${DOLLAR}{GCP_ZONE} --project ${DOLLAR}{GCP_PROJECT_ID}
+              kubectl create namespace kotlin-ktor-starter
               kubectl apply -f basic-server.yaml
 
               echo "todo - use freshclt"
