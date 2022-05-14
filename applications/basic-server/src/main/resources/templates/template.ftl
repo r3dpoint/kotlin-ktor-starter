@@ -18,12 +18,6 @@
     <section class="callout">
         <div class="container">
             a <span class="branded">AppContinuum[]</span> application with background workers.
-        <p>
-            <a href="/">home</a>
-            <a href="/authenticated">authenticated</a>
-            <a href="/authenticated?gcp-iap-mode=SECURE_TOKEN_TEST&iap-secure-token-test-type=PAST_EXPIRATION">expired token</a>
-            <a href="/authorized">authorized</a>
-        </p>
         </div>
     </section>
     <main>
