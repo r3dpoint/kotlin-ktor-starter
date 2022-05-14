@@ -4,50 +4,37 @@
     <head>
         <meta charset="UTF-8">
         <meta name=viewport content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#2B3137">
-
-        <title>Kotlin ktor starter</title>
         <link rel="stylesheet" href="/style/reset.css">
-        <link rel="stylesheet" href="/style/site.css">
+        <link rel="stylesheet" href="/style/style.css">
+        <link rel="icon" type="image/svg" href="/favicon.svg">
+        <title>Kotlin ktor starter</title>
     </head>
     <body>
     <header>
         <div class="container">
-            <h1>Kotlin Ktor starter</h1>
-
-            <p>
-                Basic application with background workers using Kotlin and Ktor
-            </p>
-            <p>
-                <a href="/">home</a>
-                <a href="/authenticated">authenticated</a>
-                <a href="/authenticated?gcp-iap-mode=SECURE_TOKEN_TEST&iap-secure-token-test-type=PAST_EXPIRATION">expired token</a>
-                <a href="/authorized">authorized</a>
-            </p>
+            <h1>Kotlin ktor starter</h1>
         </div>
     </header>
-
-    <#nested />
-
-    <section>
+    <section class="callout">
         <div class="container">
-            <#if message??>
-                <p style="color: #ED804A">${message}</p>
-            </#if>
-
-            <#if headers??>
-                <p>Request headers</p>
-                <pre>
-                <code>
-                    <#list headers as key, value>
-${key}: ${value}
-                    </#list>
-                </code>
-            </pre>
-            </#if>
+            a <span class="branded">AppContinuum[]</span> application with background workers.
+        <p>
+            <a href="/">home</a>
+            <a href="/authenticated">authenticated</a>
+            <a href="/authenticated?gcp-iap-mode=SECURE_TOKEN_TEST&iap-secure-token-test-type=PAST_EXPIRATION">expired token</a>
+            <a href="/authorized">authorized</a>
+        </p>
         </div>
     </section>
-
+    <main>
+        <#nested>
+    </main>
+    <footer>
+        <div class="container">
+            <script>document.write("©" + new Date().getFullYear());</script>
+            Initial Capacity, Inc. All rights reserved.
+        </div>
+    </footer>
     </body>
     </html>
 </#macro>

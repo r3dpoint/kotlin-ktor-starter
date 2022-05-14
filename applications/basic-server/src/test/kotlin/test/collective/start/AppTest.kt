@@ -37,7 +37,7 @@ class AppTest {
         handleRequest(HttpMethod.Get, "/authenticated").apply {
             assertEquals(200, response.status()?.value)
             println(response.content!!)
-            assertTrue(response.content!!.contains("Sorry, your email account is not authorized. missing json assertion"))
+            assertTrue(response.content!!.contains("Sorry, your email account is not authorized. Unable to find web token."))
         }
     }
 

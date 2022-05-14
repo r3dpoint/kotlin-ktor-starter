@@ -6,6 +6,9 @@
             <p>
                 Authenticated users with basic access.
             </p>
+            <#if message??>
+                <p style="color: #ED804A">${message}</p>
+            </#if>
         </div>
     </section>
 

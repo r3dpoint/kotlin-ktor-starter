@@ -6,6 +6,9 @@
             <p>
                 An example application using Kotlin and Ktor.
             </p>
+            <#if message??>
+                <p style="color: #ED804A">${message}</p>
+            </#if>
         </div>
     </section>
 

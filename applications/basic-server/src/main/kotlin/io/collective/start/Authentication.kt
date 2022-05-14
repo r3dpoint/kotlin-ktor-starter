@@ -15,7 +15,7 @@ fun Route.authenticated(verifier: TokenVerifier, callback: Route.() -> Unit): Ro
         val assertion = call.request.headers.get("X-Goog-IAP-JWT-Assertion")
 
         if (assertion == null) {
-            val message = "Sorry, your email account is not authorized. missing json assertion"
+            val message = "Sorry, your email account is not authorized. Unable to find web token."
             call.respond(FreeMarkerContent("index.ftl", mapOf("message" to message)))
             finish()
             return@intercept
