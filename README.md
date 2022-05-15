@@ -1,24 +1,20 @@
 # Kotlin ktor example
 
-A [application continuum](https://www.appcontinuum.io/) style example application using Kotlin and Ktor that includes a single
- web application with 2 background workers. Deployed via [Fresh Cloud](https://www.freshcloud.com/).
+An [application continuum](https://www.appcontinuum.io/) style example application using Kotlin and Ktor
+that includes a single web application with 2 background workers. Deployed via
+[Fresh Cloud](https://www.freshcloud.com/).
 
 * Basic web application
 * Data analyzer
 * Data collector
 
-The example depends on the below technologies -
+The example showcases on the below technologies -
 
 * Language [Kotlin](https://kotlinlang.org)
 * Web Framework [Ktor](https://ktor.io) with [Netty](https://netty.io/) and [Freemarker](https://freemarker.apache.org)
 * Build tool [Gradle](https://gradle.org)
 * Testing tools [JUnit](https://junit.org/)
-* Production [Heroku](https://www.heroku.com)
-
-(May-2021) We've been using the kotlin-ktor-starter to explore identity-aware proxies and kubernetes -
-and have included a few kubernetes yaml files that describe ingress, service, and backend
-objects. We're also using [buildpacks](https://buildpacks.io/docs/tools/pack/cli/pack_build/) to
-build and then run the application on our kubernetes cluster.
+* Production [FreshCloud](https://www.freshcloud.com/) on Google's Cloud Platform
 
 ## Configuration
 
@@ -64,5 +60,8 @@ Build the application using pack.
 pack build kotlin-ktor-starter --builder heroku/buildpacks:20
 ```
 
-Fresh cloud deployment and pipline files are located in `deployment`.
-Google cloud kubernetes deployment and service files located in `applications/basic-server`.
+## Deployment
+
+Fresh cloud deployment and pipeline files are located in `deployment`.
+Experimental [Identity Aware Proxy](https://cloud.google.com/iap) deployment and service files
+are located in `applications/basic-server`.
