@@ -62,6 +62,6 @@ pack build kotlin-ktor-starter --builder heroku/buildpacks:20
 
 ## Deployment
 
-Fresh cloud deployment and pipeline files are located in `deployment`.
+Fresh cloud deployment and pipeline files are located in `deployments`.
 Experimental [Identity Aware Proxy](https://cloud.google.com/iap) deployment and service files
-are located in `applications/basic-server`.
+are located in `experimental`.
