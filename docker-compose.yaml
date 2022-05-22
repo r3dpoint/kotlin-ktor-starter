@@ -1,7 +1,7 @@
 services:
   basic-server:
     image: kotlin-ktor-starter
-    container_name: basic-server
+    container_name: kotlin-ktor-server
     ports:
       - "8888:8888"
     environment:
@@ -9,7 +9,7 @@ services:
       APP: applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar
   data-analyzer:
     image: kotlin-ktor-starter
-    container_name: data-analyzer
+    container_name: kotlin-ktor-analyzer
     ports:
       - "8887:8887"
     environment:
@@ -17,7 +17,7 @@ services:
       APP: applications/data-analyzer-server/build/libs/data-analyzer-server-1.0-SNAPSHOT.jar
   data-collector:
     image: kotlin-ktor-starter
-    container_name: data-collector
+    container_name: kotlin-ktor-collector
     ports:
       - "8886:8886"
     environment:
