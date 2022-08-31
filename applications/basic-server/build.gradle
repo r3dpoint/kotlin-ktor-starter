@@ -7,10 +7,6 @@ mainClassName = "io.collective.start.AppKt"
 dependencies {
     implementation "io.ktor:ktor-freemarker:$ktor_version"
     implementation "io.ktor:ktor-jackson:$ktor_version"
-
-    implementation "com.google.auth:google-auth-library-oauth2-http:0.25.5"
-    implementation "io.ktor:ktor-auth:$ktor_version"
-    implementation "io.ktor:ktor-auth-jwt:$ktor_version"
 }
 
 tasks.withType(Copy).all {
