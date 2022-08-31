@@ -8,13 +8,15 @@ Deployed via [Fresh Cloud](https://www.freshcloud.com/).
 * Data analyzer
 * Data collector
 
+### Technology stack
+
 The example showcases on the below technologies -
 
 * Language [Kotlin](https://kotlinlang.org)
 * Web Framework [Ktor](https://ktor.io) with [Netty](https://netty.io/) and [Freemarker](https://freemarker.apache.org)
 * Build tool [Gradle](https://gradle.org)
 * Testing tools [JUnit](https://junit.org/)
-* Production [FreshCloud](https://www.freshcloud.com/) on Google's Cloud Platform
+* Production [GoogleCloud](https://cloud.google.com/) on Google's Cloud Platform
 
 ## Getting Started
 
@@ -56,8 +58,22 @@ export PORT=8881
 
 Run servers locally using the below example.
 
+### Web application
+
 ```bash
 java -jar applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar
+```
+
+### Data collector
+
+```bash
+java -jar applications/data-collector-server/build/libs/data-collector-server-1.0-SNAPSHOT.jar
+```
+
+### Data analyzer
+
+```bash
+java -jar applications/data-analyzer-server/build/libs/data-analyzer-server-1.0-SNAPSHOT.jar
 ```
 
 That's a wrap for now.
