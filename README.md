@@ -1,8 +1,7 @@
 # Kotlin ktor starter
 
 An [application continuum](https://www.appcontinuum.io/) style example using Kotlin and Ktor
-that includes a single web application with 2 background workers.
-Deployed via [Fresh Cloud](https://www.freshcloud.com/).
+that includes a single web application with two background workers.
 
 * Basic web application
 * Data analyzer
@@ -10,13 +9,13 @@ Deployed via [Fresh Cloud](https://www.freshcloud.com/).
 
 ### Technology stack
 
-The example showcases on the below technologies -
-
-* Language [Kotlin](https://kotlinlang.org)
-* Web Framework [Ktor](https://ktor.io) with [Netty](https://netty.io/) and [Freemarker](https://freemarker.apache.org)
-* Build tool [Gradle](https://gradle.org)
-* Testing tools [JUnit](https://junit.org/)
-* Production [GoogleCloud](https://cloud.google.com/) on Google's Cloud Platform
+This codebase is written in a language called [Kotlin](https://kotlinlang.org) that is able to run on the JVM with full
+Java compatibility.
+It uses the [Ktor](https://ktor.io) web framework, and runs on the [Netty](https://netty.io/) web server.
+HTML templates are written using [Freemarker](https://freemarker.apache.org).
+The codebase is tested with [JUnit](https://junit.org/) and uses [Gradle](https://gradle.org) to build a jarfile.
+The [pack cli](https://buildpacks.io/docs/tools/pack/) is used to build a [Docker](https://www.docker.com/) container which is deployed to
+[Google Cloud](https://cloud.google.com/) on Google's Cloud Platform.
 
 ## Getting Started
 
@@ -24,39 +23,34 @@ Building a Docker container and running with Docker.
 
 ## Buildpacks
 
-Installing the [pack](https://buildpacks.io/docs/tools/pack/) CLI
+1.  Install the [pack](https://buildpacks.io/docs/tools/pack/) CLI.
+    ```bash
+    brew install buildpacks/tap/pack
+    ```
 
-```bash
-brew install buildpacks/tap/pack
-```
+1.  Build using pack.
+    ```bash
+    pack build kotlin-ktor-starter --builder heroku/buildpacks:20
+    ```
 
-Build using pack.
-
-```bash
-pack build kotlin-ktor-starter --builder heroku/buildpacks:20
-```
-
-Running with docker.
-
-```bash
-docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
-```
+1.  Run with docker.
+    ```bash
+    docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
+    ```
 
 ## Development
 
-Building a Java Archive file (jar) and running with gradle.
+1.  Build a Java Archive (jar) file.
+    ```bash
+    ./gradlew clean build
+    ```
 
-```bash
-./gradlew clean build
-```
+1.  Configure the port that each server runs on.
+    ```bash
+    export PORT=8881
+    ```
 
-Configure the port that each server runs on.
-
-```bash
-export PORT=8881
-```
-
-Run servers locally using the below example.
+Run the servers locally using the below examples.
 
 ### Web application
 
