@@ -19,25 +19,6 @@ The [pack cli](https://buildpacks.io/docs/tools/pack/) is used to build a [Docke
 
 ## Getting Started
 
-Building a Docker container and running with Docker.
-
-## Buildpacks
-
-1.  Install the [pack](https://buildpacks.io/docs/tools/pack/) CLI.
-    ```bash
-    brew install buildpacks/tap/pack
-    ```
-
-1.  Build using pack.
-    ```bash
-    pack build kotlin-ktor-starter --builder heroku/buildpacks:20
-    ```
-
-1.  Run with docker.
-    ```bash
-    docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
-    ```
-
 ## Development
 
 1.  Build a Java Archive (jar) file.
@@ -69,5 +50,26 @@ java -jar applications/data-collector-server/build/libs/data-collector-server-1.
 ```bash
 java -jar applications/data-analyzer-server/build/libs/data-analyzer-server-1.0-SNAPSHOT.jar
 ```
+
+## Production
+
+Building a Docker container and running with Docker.
+
+## Buildpacks
+
+1.  Install the [pack](https://buildpacks.io/docs/tools/pack/) CLI.
+    ```bash
+    brew install buildpacks/tap/pack
+    ```
+
+1.  Build using pack.
+    ```bash
+    pack build kotlin-ktor-starter --builder heroku/buildpacks:20
+    ```
+
+1.  Run with docker.
+    ```bash
+    docker run  -e "PORT=8882" -e "APP=applications/basic-server/build/libs/basic-server-1.0-SNAPSHOT.jar" kotlin-ktor-starter
+    ```
 
 That's a wrap for now.
