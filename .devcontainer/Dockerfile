@@ -1,4 +1,9 @@
-FROM mcr.microsoft.com/devcontainers/java:1-21-bullseye
+# Gradle Compatibility
+# https://docs.gradle.org/current/userguide/compatibility.html
+
+# Available Versions
+# https://github.com/devcontainers/templates/blob/main/src/java-postgres/devcontainer-template.json
+FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
 
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
