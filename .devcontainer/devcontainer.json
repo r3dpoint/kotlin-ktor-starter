@@ -28,6 +28,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"mathiasfrohlich.kotlin",
 				"redhat.java",
 				"vscjava.vscode-gradle",
 				// "vscjava.vscode-java-debug",
